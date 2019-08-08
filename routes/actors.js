@@ -7,14 +7,14 @@ actors.get('/',(req,res)=>{
         if (err) throw err;
         res.status(200).json(result);
       });      
-})
+});
 
 actors.get('/:id',(req,res)=>{
     pool.query(`SELECT * FROM actor WHERE ActorID=${req.params.id}`, (err, result, fields) => {
         if (err) throw err;
         res.status(200).json(result);
       });      
-})
+});
 
 actors.delete('/:id',(req,res)=>{
   pool.query(`DELETE FROM actor WHERE ActorID=${req.params.id}`,
@@ -22,27 +22,33 @@ actors.delete('/:id',(req,res)=>{
     if (err) throw err;
     res.status(200).json(result);
   });
-})
+});
 
 actors.post('/add',(req,res)=>{
-    const actor = [[
-      req.body.firstName,
-      req.body.secondName,
-      req.body.gender,
-      req.body.image
-    ]];
-    const sql = 'INSERT INTO actor (firstName,secondName,gender,image) VALUES ?';
-    pool.query(sql,[actor],
-     (err, result, fields) => {
+    const {firstName,secondName,gender,image} = req.body;
+    const actor = {
+      firstName,
+      secondName,
+      gender,
+      image
+      };
+    const sql = 'INSERT INTO actor SET ?';
+    pool.query(sql,actor,(err, result, fields) => {
       if (err) throw err;
       res.status(201).json(result);
     });
 });
 
 actors.put('/:id',(req,res)=>{
-    const sql = `UPDATE actor SET firstName='${req.body.firstName}',secondName='${req.body.secondName}',gender='${req.body.gender}',image='${req.body.image}' WHERE ActorID=${req.params.id}`;
-    pool.query(sql,
-     (err, result, fields) => {
+  const {firstName,secondName,gender,image} = req.body;
+    const actor = {
+      firstName,
+      secondName,
+      gender,
+      image
+      };
+    const sql = `UPDATE actor SET ? WHERE ActorID=${req.params.id}`;
+    pool.query(sql,actor,(err, result, fields) => {
       if (err) throw err;
       res.status(201).json(result);
     });

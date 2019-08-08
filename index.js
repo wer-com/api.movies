@@ -23,7 +23,8 @@ app.get('/',(req,res)=>{
 })
 
 app.use('/actor',actors);
-
+app.use('/movie',movies);
+app.use('/cast',cast);
 
 const port = process.env.PORT || 3100;
 const server = http.createServer(app);
