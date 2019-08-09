@@ -19,7 +19,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 
 app.get('/',(req,res)=>{
-    res.status(200).send('HELLO THERE')
+    res.status(200).send('HELLO THERE');
 })
 
 app.use('/actor',actors);

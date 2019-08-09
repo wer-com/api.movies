@@ -133,7 +133,7 @@ ALTER TABLE `movie`
 -- Constraints for table `cast`
 --
 ALTER TABLE `cast`
-  ADD CONSTRAINT `cast_ibfk_1` FOREIGN KEY (`ActorID`) REFERENCES `actor` (`ActorID`),
+  ADD CONSTRAINT `cast_ibfk_1` FOREIGN KEY (`ActorID`) REFERENCES `actor` (`ActorID`) ON DELETE CASCADE,
   ADD CONSTRAINT `cast_ibfk_3` FOREIGN KEY (`MovieID`) REFERENCES `movie` (`MovieID`) ON DELETE CASCADE;
 COMMIT;
 
